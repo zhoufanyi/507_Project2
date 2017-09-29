@@ -229,6 +229,20 @@ print("\n***** PROBLEM 3 *****\n")
 # data saved in each variable will be the same each time you run the file,
 # as long as you do not delete your cached data.)
 
+# You may want to do some investigation on these variables to make sure
+# you understand correctly what type of value they hold, what's in each
+# one!
+
+# Use the values in these variables above, and the class definitions
+# you've written, in order to create a list of each media type, including
+# "media" generally.
+
+# You should end up with: a list of Media objects saved in a variable media_list,
+# a list of Song objects saved in a variable song_list,
+# a list of Movie objects saved in a variable movie_list.
+
+# You may use any method of accumulation to make that happen.
+
 media_samples = sample_get_cache_itunes_data("love")["results"]
 media_list = []
 for media in media_samples:
@@ -245,43 +259,8 @@ for movie in movie_samples:
     movie_list.append(Movie(movie))
 
 
-# You may want to do some investigation on these variables to make sure
-# you understand correctly what type of value they hold, what's in each
-# one!
-
-# Use the values in these variables above, and the class definitions
-# you've written, in order to create a list of each media type, including
-# "media" generally.
-
-# You should end up with: a list of Media objects saved in a variable media_list,
-# a list of Song objects saved in a variable song_list,
-# a list of Movie objects saved in a variable movie_list.
-
-# You may use any method of accumulation to make that happen.
-
-
 # [PROBLEM 4] [200 POINTS]
-# print("\n***** PROBLEM 4 *****\n")
-
-def list_Writer(media_collection):
-    media_type = type(media_collection[0])
-    if media_type == Song or media_type == Movie:
-        filename = str(media_type)[17:str(
-            media_type).find('\'', 17)].lower()+'s.csv'
-    else:
-        filename = str(media_type)[17:str(
-            media_type).find('\'', 17)].lower()+'.csv'
-    with open(filename, 'w', newline='') as csvfile:
-        csvWriter = csv.writer(csvfile, delimiter=',')
-        csvWriter.writerow(
-            ['title', 'author', 'itunes_id', 'itunes_URL', 'length'])
-        for item in media_collection:
-            csvWriter.writerow(item.list_generator())
-list_Writer(song_list)
-list_Writer(media_list)
-list_Writer(movie_list)
-
-
+print("\n***** PROBLEM 4 *****\n")
 # Finally, write 3 CSV files:
 # - movies.csv
 # - songs.csv
@@ -320,3 +299,22 @@ list_Writer(movie_list)
 
 # HINT #4: Write or draw out your plan for this before you actually start
 # writing the code! That will make it much easier.
+
+
+def list_Writer(media_collection):
+    media_type = type(media_collection[0])
+    if media_type == Song or media_type == Movie:
+        filename = str(media_type)[17:str(
+            media_type).find('\'', 17)].lower()+'s.csv'
+    else:
+        filename = str(media_type)[17:str(
+            media_type).find('\'', 17)].lower()+'.csv'
+    with open(filename, 'w', newline='') as csvfile:
+        csvWriter = csv.writer(csvfile, delimiter=',')
+        csvWriter.writerow(
+            ['title', 'author', 'itunes_id', 'itunes_URL', 'length'])
+        for item in media_collection:
+            csvWriter.writerow(item.list_generator())
+list_Writer(song_list)
+list_Writer(media_list)
+list_Writer(movie_list)
