@@ -113,7 +113,7 @@ class Media:
 
     def list_generator(self):
         information_list = [self.title, self.author,
-                            self.itunes_id, self.itunes_URL, self.length]
+                            self.itunes_id, self.itunes_URL, len(self)]
         return information_list
 
     def __str__(self):
